@@ -25,24 +25,21 @@ biggest = []
 for article in articles:
     with open(article) as csv_file:
         cont = 0
-        try:
-            csv_reader = read_csv(csv_file)
-            word = word.lower()
-            print_news = []
-            for row in csv_reader.values.tolist():
-                title = row[2].lower()
-                news = row[9].lower()
-                if title.find(word) > 0 or news.find(word) > 0:
-                    count = find_word((title, news), word)
-                    if cont < 10:
-                        print_news.append([count, row[1], row[2]])
-                    else:
-                        print_news.sort(reverse=True)
-                        print_news.append([count, row[1], row[2]])
-                        print_news.pop(len(print_news) - 1)
-                    cont += 1
-        except UnicodeDecodeError:
-            pass
+        csv_reader = read_csv(csv_file, usecols=[1,2,9])
+        word = word.lower()
+        print_news = []
+        for row in csv_reader.values.tolist():
+            title = row[1].lower()
+            news = row[2].lower()
+            if title.find(word) > 0 or news.find(word) > 0:
+                count = find_word((title, news), word)
+                if cont < 10:
+                    print_news.append([count, row[0], row[1]])
+                else:
+                    print_news.sort(reverse=True)
+                    print_news.append([count, row[1], row[2]])
+                    print_news.pop(len(print_news) - 1)
+                cont += 1
 
 for to_print in print_news:
     print(to_print[0], to_print[1], to_print[2])
