@@ -29,17 +29,19 @@ for article in articles:
         word = word.lower()
         print_news = []
         for row in csv_reader.values.tolist():
-            title = row[1].lower()
+            title = row[1]
             news = row[2].lower()
-            if title.find(word) > 0 or news.find(word) > 0:
-                count = find_word((title, news), word)
-                if cont < 10:
-                    print_news.append([count, row[0], row[1]])
-                else:
-                    print_news.sort(reverse=True)
-                    print_news.append([count, row[1], row[2]])
-                    print_news.pop(len(print_news) - 1)
-                cont += 1
+            if type(title) is str:
+                title = title.lower()
+                if title.find(word) > 0 or news.find(word) > 0:
+                    count = find_word((title, news), word)
+                    if cont < 10:
+                        print_news.append([count, row[0], row[1]])
+                    else:
+                        print_news.sort(reverse=True)
+                        print_news.append([count, row[1], row[2]])
+                        print_news.pop(len(print_news) - 1)
+                    cont += 1
 
 for to_print in print_news:
     print(to_print[0], to_print[1], to_print[2])
