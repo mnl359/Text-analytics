@@ -20,7 +20,7 @@ def find_word(news, word):
 word = input("Ingrese la palabra a buscar: ")
 articles = ['../all-articles/articles1.csv', '../all-articles/articles2.csv', '../all-articles/articles3.csv']
 
-biggest = []
+temp = []
 for article in articles:
     with open(article) as csv_file:
         cont = 0
@@ -28,19 +28,18 @@ for article in articles:
         word = word.lower()
         print_news = []
         for row in csv_reader.values.tolist():
-            title = row[1]
-            news = row[2].lower()
-            title = title.lower()
-            if title.find(word) > 0 or news.find(word) > 0:
+            csv_reader = read_csv(csv_file, usecols=[1,2,9])
+            word = word.lower()
+            for row in csv_reader.values.tolist():
+                title = str(row[1]).lower()
+                news = str(row[2]).lower()
                 count = find_word((title, news), word)
-                if cont < 10:
-                    print_news.append([count, row[0], row[1]])
-                else:
-                    print_news.sort(reverse=True)
-                    print_news.append([count, row[1], row[2]])
-                    print_news.pop(len(print_news) - 1)
-                cont += 1
+                if count > 0:
+                    temp.append([count, row[0], row[1]])
+    csv_file.close()
 
-for to_print in print_news:
+print_news = sorted(temp, key=lambda x: x[0])
+print_news.reverse()
+for to_print in print_news[:10]:
     print(to_print[0], to_print[1], to_print[2])
 
