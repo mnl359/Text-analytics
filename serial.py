@@ -1,8 +1,9 @@
-#!/usr/local/lib/python3
+#!/usr/bin/python3
 
 from csv import DictReader, field_size_limit
 from pandas import read_csv
 from sys import maxsize
+from os import listdir
 
 field_size_limit(maxsize)
 
@@ -17,9 +18,15 @@ def find_word(news, word):
             count_des += 1
     return count_tit + count_des
 
+directory = input("Ingrese la ruta de los directorios: ")
+files = listdir(directory)
+articles = []
 word = input("Ingrese la palabra a buscar: ")
-articles = ['../all-articles/articles1.csv', '../all-articles/articles2.csv', '../all-articles/articles3.csv']
 
+for file in files:
+    filename, extension = file.split(".")
+    if extension == "csv":
+        articles.append(file)
 temp = []
 for article in articles:
     with open(article) as csv_file:
