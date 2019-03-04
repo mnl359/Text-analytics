@@ -21,24 +21,18 @@ for file in files:
     filename, extension = file.split(".")
     if extension == "csv":
         articles.append(directory + file)
-articles = ['../all-articles/articles3.csv', '../all-articles/articles1.csv', '../all-articles/articles2.csv']
-word = input("Ingrese la palabra a buscar: ")
+
+word = input("Ingrese la palabra a buscar: ").lower()
 temp = []
 for article in articles:
-    print(article)
     with open(article) as csv_file:
         csv_reader = read_csv(csv_file, usecols=[1,2,9])
-        word = word.lower()
-        print_news = []
         for row in csv_reader.values.tolist():
-            csv_reader = read_csv(csv_file, usecols=[1,2,9])
-            word = word.lower()
-            for row in csv_reader.values.tolist():
-                title = str(row[1]).lower()
-                news = str(row[2]).lower()
-                count = find_word((title, news), word)
-                if count > 0:
-                    temp.append([count, row[0], row[1]])
+            title = str(row[1]).lower()
+            news = str(row[2]).lower()
+            count = find_word((title, news), word)
+            if count > 0:
+                temp.append([count, row[0], row[1]])
     csv_file.close()
 
 print_news = sorted(temp, key=lambda x: x[0])
