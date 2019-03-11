@@ -11,7 +11,7 @@ Los datos de trabajo para el proyecto son un conjunto de noticias publicados en 
 
 ## Solución planteada con paralelismo.
 
-** Uso de framework OpenMP con C++ **
+**Uso de framework OpenMP con C++**
 
 1. Pedir ruta a ficheros que se van a leer. 
 2. Abrir el directorio desde el que se van a leer los ficheros. 
@@ -29,9 +29,9 @@ Los datos de trabajo para el proyecto son un conjunto de noticias publicados en 
 
 ## Solución planteada de forma distribuida con paralelismo. 
 
-** Uso de los frameworks OpenMP y MPI con C++ **
+**Uso de los frameworks OpenMP y MPI con C++**
 
-** Nota: ** en esta solución, se utilizará un nodo Master y dos nodos esclavos provistos desde el DCA de la universidad EAFIT para estudiantes que cursan la materia Tópicos Especiales en Telemática en el semestre 2019-1.
+**Nota:** en esta solución, se utilizará un nodo Master y dos nodos esclavos provistos desde el DCA de la universidad EAFIT para estudiantes que cursan la materia Tópicos Especiales en Telemática en el semestre 2019-1.
 
 1. Pedir ruta a ficheros que serán leídos. 
 2. Distribuir ficheros desde el master a cada uno de los esclavos.
