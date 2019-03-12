@@ -1,25 +1,29 @@
-# Text Analytics
+# Analítica de texto
 
-Program that search the number of appearances of a word in a news dataset.
+Programa que busca y cuenta el número de apariciones de una palabra en un dataset de noticias.
 
-## Requirements
+## Teoría tras el código
+
+* [Openmp](https://github.com/mnl359/Text-analytics/blob/master/openmp.md)
+
+## Requerimientos
 
 * Python 3
 
-## Usage
+## Uso
 
-### Serial code
+### Código serial
 
 ``` bash
 python3 serial.py
 ```
-Or check if the interpreter path is correct at the beginning of the code and give it
-the necessary permission:
+O verifica si el path al interpreter esta correcto en el inicio del código y 
+modifique los permisos para poder correr el programa.
 
 ``` bash
 ./serial.py
 ```
-## Members
+## Integrantes
 
 * Wendy Maria Arango <warango4@eafit.edu.co>
 * Manuela Carrasco <mcarras1@eafit.edu.co>
