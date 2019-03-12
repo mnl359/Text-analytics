@@ -3,8 +3,7 @@
 ## MÉTODO PCAM
 
 ### Algoritmo en serial
-
-    ```
+    
     pedir palabra a ser buscada
     abrir directorio
     crear arreglo_noticias vacío
@@ -29,7 +28,6 @@
     fin ciclo
     imprimir arreglo_noticias
     cerrar directorio
-    ```
 
 * **P - Partitioning (Particionamiento)**
     - El particionamiento se refiere a descomponer la tarea a llevar a cabo en piezas pequeñas, de manera tal que permita identificar de manera sencilla las oportunidades que hay de ejecución paralela. 
@@ -42,4 +40,4 @@
         - Hay una parte de descomposición funcional (referente al procesamiento).
 
 
-![Diseño PCAM](/home/gwen/Documents/University/7thSemester/TopicosTelematica/Projects/Text-analytics/pcam.png)
+![Diseño PCAM](https://github.com/mnl359/Text-analytics/blob/master/pcam.png)
