@@ -34,10 +34,26 @@
 
         *Granularidad fina*: provee mayor flexibilidad para poder analizar qué partes del algoritmo pueden ser paralelizadas. 
 
-        - Hay una parte de descomposición por dominio (es decir, los datos).
+        *Granularidad gruesa*: se refiere a la forma más compleja en la que están dados los datos. 
 
+        La descomposición de datos se puede hacer en diferentes fases. 
+        Lo ideal es que en primera instancia se dividan los datos de mayor volumen o a los que más se acceden (granularidad gruesa) en datos más pequeños de más o menos el mismo tamaño (granularidad fina). 
+
+        - Hay una parte de descomposición por dominio (es decir, los datos).
 
         - Hay una parte de descomposición funcional (referente al procesamiento).
 
 
-![Diseño PCAM](https://github.com/mnl359/Text-analytics/blob/master/pcam.png)
+### Imágenes diseño PCAM
+
+__Descomposición por dominio__
+
+![Particionamiento por dominio](https://github.com/mnl359/Text-analytics/blob/master/domain-partitioning.png)
+
+__Descomposición funcional__
+
+![Particionamiento funcional](https://github.com/mnl359/Text-analytics/blob/master/functional-partitioning.png)
+
+__Comunicación__
+
+![Comunicación](https://github.com/mnl359/Text-analytics/blob/master/communication.png)
