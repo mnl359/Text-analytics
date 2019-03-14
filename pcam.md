@@ -81,14 +81,15 @@ __Mapeo__
 * **C - Communication (Comunicación)**
     - La comunicación se refiere al proceso de intercambio de datos entre tareas. Esto se debe a que muchas veces para que una tarea pueda ejecutarse, necesita datos que le debe entregar otra tarea, así que debe haber un canal de comunicación entre ellas. 
 
-    Para el problema tratado en esta activida, en general la comunicación entre las diferentes tareas es:
-      - Local: porque cada tarea se comunica con un conjunto de otras tareas, sin que haya centralización de una tarea en particular.
+    Para el problema tratado en esta actividad, en general la comunicación entre las diferentes tareas es:
 
-      - No estructurada: ya que al crear las redes de comunicación, se obtuvo un grafo arbitrario.
+      * Local: porque cada tarea se comunica con un conjunto de otras tareas, sin que haya centralización deuna tarea en particular.
 
-      - Estática: puesto que la volatilidad de los datos no es suficiente como para cambiar la identidad de la comunicación en ejecución.
+      * No estructurada: ya que al crear las redes de comunicación, se obtuvo un grafo arbitrario.
 
-      - Síncrona con buffer. 
+      * Estática: puesto que la volatilidad de los datos no es suficiente como para cambiar la identidad de lacomunicación en ejecución.
+
+      * Síncrona con buffer. 
 
     *¿Cómo se va a distribuir la comunicación y la computación?*: 
 
@@ -97,11 +98,11 @@ __Mapeo__
 
     Para la solución actual se realizó aglomeración por computación. Esto debido a que las tareas se pueden reducir si se tiene en cuenta que las funcionalidades serán llevadas a cabo por varias máquinas (nodos). 
     
-      - Cada fichero puede ser distribuido a un nodo diferente para que se encargue de procesarlo.
-      - Buscar la palabra en el contenido es una tarea que puede ser llevada a cabo paralelamente por hilos.
-      - Retornar el contador y el identificador y título de la noticia sería la finalidad de cada hilo.
-      - Devolver el arreglo sería una tarea de cada uno de los nodos que participa con el procesamiento de un fichero.
-      - Recibir al final todos los datos y hacer el 'reduce' final de estos se le asigna al nodo controlador.
+      * Cada fichero puede ser distribuido a un nodo diferente para que se encargue de procesarlo.
+      * Buscar la palabra en el contenido es una tarea que puede ser llevada a cabo paralelamente por hilos.
+      * Retornar el contador y el identificador y título de la noticia sería la finalidad de cada hilo.
+      * Devolver el arreglo sería una tarea de cada uno de los nodos que participa con el procesamiento de un fichero.
+      * Recibir al final todos los datos y hacer el 'reduce' final de estos se le asigna al nodo controlador.
     
     De esta manera, las tareas llevadas a cabo de forma secuencial cada vez que el algoritmo entraba en un ciclo, ahora se pueden realizar al mismo tiempo por cada una de las máquinas y sus respectivos hilos. 
 
