@@ -25,12 +25,11 @@ typedef struct freq {
     string title;
 } freq;
 
-// When called operator <<, passes through pipes value of variable 'value' to counterValue
 ostream &operator<<(ostream &counterValue, Counter &counter) { return counterValue << counter.cont; }
 
 //Table that saves each word with the id of the notice it belongs to and the frequency that has in 
 //the content of the new
-map<string, map<string, freq>> wordsFrequency; 
+map<string, map<string, freq> > wordsFrequency; 
 
 /** 
  * Counts how many times a word occurs in content.
@@ -57,6 +56,7 @@ map<string, Counter> wordCount(const char* input) {
 */
 
 int wordsCounting(const string path){
+    cout << path << endl;
     ifstream file(path);
 
     if(!file.is_open()){
@@ -69,16 +69,17 @@ int wordsCounting(const string path){
     string id;
     string title;
     string content;
-    getline(file, header); //Saves what's in folder inside header
+    getline(file, header); //Saves what's in file inside header
 
     while(file.good()){
+        // Every time it finds a tabulator, saves what found till there on each variable. 
         getline(file, index, '\t');
         getline(file, id, '\t');
         getline(file, title, '\t');
         getline(file, content, '\t');
 
         map<string, Counter> counter = wordCount(content.c_str());
-        map<string, Counter, less<string>>::iterator i;
+        map<string, Counter, less<string> >::iterator i;
 
         for(i = counter.begin(); i != counter.end(); ++i) {
             struct freq frequency;
@@ -113,14 +114,14 @@ int searchWord() {
         transform(searchedWord.begin(), searchedWord.end(), searchedWord.begin(), ::tolower);
 
         map<string, freq> res = wordsFrequency[searchedWord]; // Saves id of the new and how many times the word appears on it.
-        map<string, freq, less<string>>::iterator i;
+        map<string, freq, less<string> >::iterator i;
 
         int sum = 0;
 
         for (i = res.begin(); i != res.end(); ++i) {
             sum += (*i).second.frequency;
 
-            cout << (*i).second.frequency << " --- " << (*i).second.id << " --- " << (*i).second.title << endl;
+            //cout << (*i).second.frequency << " --- " << (*i).second.id << " --- " << (*i).second.title << endl;
         }
         cout << "La palabra ingresada " << searchedWord << " se encuentra " << sum << " veces en todo el conjunto de datos." << endl;
         cout << "Ingrese la siguiente palabra a ser buscada: ";
@@ -128,7 +129,7 @@ int searchWord() {
     return 0;
 }
 
-int main(int arc, char* argv[]) {
+int main(int argc, char* argv[]) {
     string files[3] = {"file1.csv", "file2.csv", "file3.csv"};
     int i = 0;
     while(i < 3) {
