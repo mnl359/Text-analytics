@@ -76,7 +76,7 @@ int wordsCounting(const string path){
         getline(file, index, '\t');
         getline(file, id, '\t');
         getline(file, title, '\t');
-        getline(file, content, '\t');
+        getline(file, content, '\n');
 
         map<string, Counter> counter = wordCount(content.c_str());
         map<string, Counter, less<string> >::iterator i;
