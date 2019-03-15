@@ -81,30 +81,30 @@ __Mapeo__
 * **C - Communication (Comunicación)**
     - La comunicación se refiere al proceso de intercambio de datos entre tareas. Esto se debe a que muchas veces para que una tarea pueda ejecutarse, necesita datos que le debe entregar otra tarea, así que debe haber un canal de comunicación entre ellas. 
 
-    Para el problema tratado en esta actividad, en general la comunicación entre las diferentes tareas es:
+        Para el problema tratado en esta actividad, en general la comunicación entre las diferentes tareas es:
 
-      * Local: porque cada tarea se comunica con un conjunto de otras tareas, sin que haya centralización deuna tarea en particular.
+          * Local: porque cada tarea se comunica con un conjunto de otras tareas, sin que haya centralización deuna     tarea en particular.
 
-      * No estructurada: ya que al crear las redes de comunicación, se obtuvo un grafo arbitrario.
+          * No estructurada: ya que al crear las redes de comunicación, se obtuvo un grafo arbitrario.
 
-      * Estática: puesto que la volatilidad de los datos no es suficiente como para cambiar la identidad de lacomunicación en ejecución.
+          * Estática: puesto que la volatilidad de los datos no es suficiente como para cambiar la identidad de     lacomunicación en ejecución.
 
-      * Síncrona con buffer. 
+          * Síncrona con buffer. 
 
-    *¿Cómo se va a distribuir la comunicación y la computación?*: 
+        *¿Cómo se va a distribuir la comunicación y la computación?*: 
 
 * **A - Agglomeration (Aglomeración)**
     - Se trata de la manera de combinar las tareas que se identificaron en la fase de particionamiento para poder aumentar la granularidad de la solución y determinar si es o no necesario replicar datos y computación.
 
-    Para la solución actual se realizó aglomeración por computación. Esto debido a que las tareas se pueden reducir si se tiene en cuenta que las funcionalidades serán llevadas a cabo por varias máquinas (nodos). 
-    
-      * Cada fichero puede ser distribuido a un nodo diferente para que se encargue de procesarlo.
-      * Buscar la palabra en el contenido es una tarea que puede ser llevada a cabo paralelamente por hilos.
-      * Retornar el contador y el identificador y título de la noticia sería la finalidad de cada hilo.
-      * Devolver el arreglo sería una tarea de cada uno de los nodos que participa con el procesamiento de un fichero.
-      * Recibir al final todos los datos y hacer el 'reduce' final de estos se le asigna al nodo controlador.
-    
-    De esta manera, las tareas llevadas a cabo de forma secuencial cada vez que el algoritmo entraba en un ciclo, ahora se pueden realizar al mismo tiempo por cada una de las máquinas y sus respectivos hilos. 
+        Para la solución actual se realizó aglomeración por computación. Esto debido a que las tareas se pueden reducir si se tiene en cuenta que las funcionalidades serán llevadas a cabo por varias máquinas (nodos) 
 
-    También se logró reducir la cantidad de veces que un dato era llevado entre tareas. 
-    El arreglo final que guarda los datos necesarios para mostrar en pantalla sobre las noticias, pasa a través de menos tareas, igual que la palabra a ser buscada. Dichas estructuras eran solicitadas en varios de los procesos pero se disminuyó, en cada nodo, la cantidad de veces pasados entre actividades. 
+          * Cada fichero puede ser distribuido a un nodo diferente para que se encargue de procesarlo.
+          * Buscar la palabra en el contenido es una tarea que puede ser llevada a cabo paralelamente por hilos.
+          * Retornar el contador y el identificador y título de la noticia sería la finalidad de cada hilo.
+          * Devolver el arreglo sería una tarea de cada uno de los nodos que participa con el procesamiento de un   fichero.
+          * Recibir al final todos los datos y hacer el 'reduce' final de estos se le asigna al nodo controlador.
+
+        De esta manera, las tareas llevadas a cabo de forma secuencial cada vez que el algoritmo entraba en un  ciclo, ahora se pueden realizar al mismo tiempo por cada una de las máquinas y sus respectivos hilos. 
+
+        También se logró reducir la cantidad de veces que un dato era llevado entre tareas. 
+        El arreglo final que guarda los datos necesarios para mostrar en pantalla sobre las noticias, pasa a través     de menos tareas, igual que la palabra a ser buscada. Dichas estructuras eran solicitadas en varios de los   procesos pero se disminuyó, en cada nodo, la cantidad de veces pasados entre actividades. 
