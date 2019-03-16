@@ -84,7 +84,6 @@ int wordsCounting(const string path){
         for(i = counter.begin(); i != counter.end(); ++i) {
             struct freq frequency;
             frequency.frequency = (*i).second.cont; //Acceses to the value in the map (Counter) and to its attribute 'cont'
-            frequency.id = id;
             frequency.title = title;
             
             // Fills the table with word, id of the new and frequency of the word. 
@@ -105,7 +104,7 @@ int wordsCounting(const string path){
 
 int searchWord() {
     string searchedWord;
-    cout << "Ingrese la palabra a ser buscada: ";
+    cout << "Enter word to search: ";
     while(cin >> searchedWord){
         if(searchedWord == "/") break;
 
@@ -115,16 +114,30 @@ int searchWord() {
 
         map<string, freq> res = wordsFrequency[searchedWord]; // Saves id of the new and how many times the word appears on it.
         map<string, freq, less<string> >::iterator i;
+        // Stores frequency paired to the struct frequency that it belongs to
+        // Saves it from largest to shortest frequency
+        multimap<int, freq, greater<int> > mmap;
 
         int sum = 0;
+        int it = 0;
 
         for (i = res.begin(); i != res.end(); ++i) {
+            (*i).second.id = (*i).first;
+            mmap.insert(pair<int, freq>((*i).second.frequency, (*i).second));       
             sum += (*i).second.frequency;
-
-            //cout << (*i).second.frequency << " --- " << (*i).second.id << " --- " << (*i).second.title << endl;
         }
-        cout << "La palabra ingresada " << searchedWord << " se encuentra " << sum << " veces en todo el conjunto de datos." << endl;
-        cout << "Ingrese la siguiente palabra a ser buscada: ";
+
+        multimap<int, freq>::iterator mmit;
+
+        //Iterates over multimap to find top 10 of news where the word occurs the most        
+        for(mmit = mmap.begin(); mmit != mmap.end(); ++mmit){
+            if(it == 10) break;
+            cout << (*mmit).first << " ---- " << (*mmit).second.id << " --- " << (*mmit).second.title << endl;
+            ++it;
+        }
+
+        cout << "Input word " << searchedWord << " is " << sum << " times in the whole dataset." << endl;
+        cout << "Enter next word to search: ";
     }
     return 0;
 }
