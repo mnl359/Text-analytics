@@ -57,7 +57,7 @@ multimap<int, freq, greater<int> > mmap1;
 multimap<int, freq, greater<int> > mmap2;
 multimap<int, freq, greater<int> > mmap3;
 
-int rank;
+int ran;
 int sum;
 int charArrLen = 256;
 
@@ -100,17 +100,17 @@ int wordsCounting(const string path) {
                 frequency.id = id;
                 frequency.title = title;
 
-                if(rank == 0){
+                if(ran == 0){
                     #pragma omp critical
                     {
                         wordsFrequency1[(*i).first][id] = frequency;
                     }
-                } else if(rank == 1){
+                } else if(ran == 1){
                     #pragma omp critical
                     {
                         wordsFrequency2[(*i).first][id] = frequency;
                     }
-                } else if(rank == 2){
+                } else if(ran == 2){
                     #pragma omp critical
                     {
                         wordsFrequency3[(*i).first][id] = frequency;
@@ -129,24 +129,24 @@ int searchWord(string searchedWord) {
     // Stores id of the new and a freq structure
     map<string, freq> tables;
 
-    if(rank == 0){
+    if(ran == 0){
         tables = wordsFrequency1[searchedWord];
-    } else if(rank == 1){
+    } else if(ran == 1){
         tables = wordsFrequency2[searchedWord];
-    } else if(rank == 2) {
+    } else if(ran == 2) {
         tables = wordsFrequency3[searchedWord];
     }
 
-    map<string, Counter, less<string> >::iterator i;
+    map<string, freq, less<string> >::iterator i;
     int partialSum = 0;
 
     for(i = tables.begin(); i != tables.end(); ++i){
-        if (rank == 0){
-            mmap1.insert(pair<int, freq>((*i).second.frequency, (*i).second));
-        } else if (rank == 1){
-            mmap2.insert(pair<int, freq>((*i).second.frequency, (*i).second));
-        } else if (rank == 2){
-            mmap3.insert(pair<int, freq>((*i).second.frequency, (*i).second));
+        if (ran == 0){
+	   mmap1.insert(pair<int, freq>((*i).second.frequency, (*i).second));
+        } else if (ran == 1){
+           mmap2.insert(pair<int, freq>((*i).second.frequency, (*i).second));
+        } else if (ran == 2){
+           mmap3.insert(pair<int, freq>((*i).second.frequency, (*i).second));
         }
 
         partialSum += (*i).second.frequency;
@@ -162,7 +162,7 @@ int searchWord(string searchedWord) {
     string newId = "";
     string newTitle = "";
 
-    if(rank == 1){
+    if(ran == 1){
         for(mmit1 = mmap2.begin(); mmit1 != mmap2.end(); ++mmit1){
             if(it == 10) break;
 
@@ -187,7 +187,7 @@ int searchWord(string searchedWord) {
             ++it;
         }
         MPI_Send(&partialSum, 1, MPI_INT, 0, 0, comm);
-    } else if(rank == 2) {
+    } else if(ran == 2) {
         for(mmit1 = mmap3.begin(); mmit1 != mmap3.end(); ++mmit1){
             if(it == 10) break;
 
@@ -216,7 +216,7 @@ int searchWord(string searchedWord) {
 int main(int argc, char* argv[]) {
     MPI_Init(&argc, &argv);
     int size;
-    MPI_Comm_rank(comm, &rank); // Rank of processors
+    MPI_Comm_rank(comm, &ran); // Rank of processors
     MPI_Comm_size(comm, &size); 
 
     MPI_Status status;
@@ -233,9 +233,9 @@ int main(int argc, char* argv[]) {
     time0 = clock();
 
     // Sends a file to each node
-    if(rank == 0) wordsCounting(files[0]);
-    else if(rank == 1) wordsCounting(files[1]);
-    else if(rank == 2) wordsCounting(files[2]);
+    if(ran == 0) wordsCounting(files[0]);
+    else if(ran == 1) wordsCounting(files[1]);
+    else if(ran == 2) wordsCounting(files[2]);
 
     time1 = clock();
     double time = (double(time1 - time0)/CLOCKS_PER_SEC);
@@ -246,7 +246,7 @@ int main(int argc, char* argv[]) {
     char rcvWord[charArrLen];
 
     while(hasToWork){
-        if (rank == 0){
+        if (ran == 0){
             string searchedWord;
             char charSearchedWord[searchedWord.length() + 1];
             cout << "Enter word to search: (Press - to finish)";
@@ -254,8 +254,8 @@ int main(int argc, char* argv[]) {
                 if(searchedWord == "-"){
                     hasToWork = false;
                     strcpy(charSearchedWord, searchedWord.c_str());
-                    MPI_Send(&charSearchedword, charArrLen, MPI_CHAR, 1, 0, comm);
-                    MPI_Send(&charSearchedword, charArrLen, MPI_CHAR, 2, 0, comm);
+                    MPI_Send(&charSearchedWord, charArrLen, MPI_CHAR, 1, 0, comm);
+                    MPI_Send(&charSearchedWord, charArrLen, MPI_CHAR, 2, 0, comm);
                     break;
                 }
 
@@ -263,8 +263,8 @@ int main(int argc, char* argv[]) {
                 // MPI accepts char array, not string. It has to be converted.
                 strcpy(charSearchedWord, searchedWord.c_str());
                 // Sends word to search to each node 
-                MPI_Send(&charSearchedword, charArrLen, MPI_CHAR, 1, 0, comm);
-                MPI_Send(&charSearchedword, charArrLen, MPI_CHAR, 2, 0, comm);
+                MPI_Send(&charSearchedWord, charArrLen, MPI_CHAR, 1, 0, comm);
+                MPI_Send(&charSearchedWord, charArrLen, MPI_CHAR, 2, 0, comm);
                 searchWord(searchedWord);
 
                 multimap<int, freq, greater<int> > mmap;
@@ -294,7 +294,7 @@ int main(int argc, char* argv[]) {
                     f.id = id; 
                     f.title = title;
 
-                    mmap.insert(pair<int, freq>(frequ, f);
+                    mmap.insert(pair<int, freq>(frequ, f));
                 }
 
                 int sumSlave1;
@@ -316,7 +316,7 @@ int main(int argc, char* argv[]) {
                     f.id = id; 
                     f.title = title;
 
-                    mmap.insert(pair<int, freq>(frequ, f);
+                    mmap.insert(pair<int, freq>(frequ, f));
                 }
                 
                 int sumSlave2;
@@ -337,8 +337,8 @@ int main(int argc, char* argv[]) {
                 cout << "Enter next word to search: (Press - to finish) ";
             }
             hasToWork = false;
-        } else if(rank == 1) {
-            MPI_Rcv(&rcvWord, charArrLen, MPI_CHAR, 0, 0, comm, &status);
+        } else if(ran == 1) {
+            MPI_Recv(&rcvWord, charArrLen, MPI_CHAR, 0, 0, comm, &status);
 
             if(strcmp(rcvWord, "-") == 0) break;
 
@@ -346,8 +346,8 @@ int main(int argc, char* argv[]) {
             searchWord(searchedWord);
 
             mmap2.clear();
-        } else if(rank == 2) {            
-            MPI_Rcv(&rcvWord, charArrLen, MPI_CHAR, 0, 0, comm, &status);
+        } else if(ran == 2) {            
+            MPI_Recv(&rcvWord, charArrLen, MPI_CHAR, 0, 0, comm, &status);
 
             if(strcmp(rcvWord, "-") == 0) break;
 
