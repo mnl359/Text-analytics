@@ -78,7 +78,7 @@ int wordsCounting(const string path){
                 getline(file, content, '\n');
             }
 
-            map<string, Counter> counter = wordCount(content.c_str());
+            map<string, Counter> counter = wordCount(content.c_str()); // Returns how many times word is in content
             map<string, Counter, less<string> >::iterator i;
 
             for(i = counter.begin(); i != counter.end(); ++i) {
@@ -99,9 +99,9 @@ int wordsCounting(const string path){
 
 int searchWord() {
     string searchedWord;
-    cout << "Ingrese la palabra a ser buscada: ";
+    cout << "Enter word to search: (Press - to finish)";
     while(cin >> searchedWord){
-        if(searchedWord == "/") break;
+        if(searchedWord == "-") break;
 
         // Points from the beggining to the end of the word, applies to it tolower function
         // and saves it in the space address where searchedWord starts.  
@@ -134,26 +134,30 @@ int searchWord() {
             ++it;
         }
 
-        cout << "La palabra ingresada " << searchedWord << " se encuentra " << sum << " veces en todo el conjunto de datos." << endl;
-        cout << "Ingrese la siguiente palabra a ser buscada: ";
+        cout << "Input word " << searchedWord << " is " << sum << " times in the whole dataset." << endl;
+        cout << "Enter next word to search: (Press - to finish) ";
     }
     return 0;
 }
 
 int main(int argc, char* argv[]) {
     string files[3];
-    files[0] = "file1.csv";
-    files[1] = "file2.csv";
-    files[2] = "file3.csv";
-    unsigned time0, time1;
+    files[0] = "../serial/file1.csv";
+    files[1] = "../serial/file2.csv";
+    files[2] = "../serial/file3.csv";
 
-    for(int i = 0; i < 3; ++i){
+    unsigned time0, time1;
+    int i = 0;
+    time0 = clock();
+
+    while(i < 3){
         wordsCounting(files[i]);
+        ++i;
     }
 
     time1 = clock();
     double time = (double(time1 - time0)/CLOCKS_PER_SEC);
-    cout << "Tiempo de ejecución con índice invertido: " << time << endl;
+    cout << "Inverted index execution: " << time << endl;
     searchWord();
     return 0;
 }
