@@ -39,7 +39,7 @@ def cleaning_content(content):
     
     return ' '.join(cleaned_str)
 
-folder = "/home/gwen/Documents/University/7thSemester/TopicosTelematica/Projects/all-articles"
+folder = "/opt/datasets"
 dataset = glob.glob(folder + "/*.csv")
 
 file_word = 'file'
