@@ -249,7 +249,7 @@ int main(int argc, char* argv[]) {
         if (ran == 0){
             string searchedWord;
             char charSearchedWord[searchedWord.length() + 1];
-            cout << "Enter word to search: (Press - to finish)";
+            cout << "Enter word to search: (Press - to finish) ";
             while(cin >> searchedWord){
                 if(searchedWord == "-"){
                     hasToWork = false;

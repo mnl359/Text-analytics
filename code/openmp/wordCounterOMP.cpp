@@ -99,7 +99,7 @@ int wordsCounting(const string path){
 
 int searchWord() {
     string searchedWord;
-    cout << "Enter word to search: (Press - to finish)";
+    cout << "Enter word to search: (Press - to finish) ";
     while(cin >> searchedWord){
         if(searchedWord == "-") break;
 

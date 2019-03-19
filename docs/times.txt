@@ -1,0 +1,15 @@
+Time serial -- 203.18
+
+OMP
+1 thread -- 198.69
+2 threads -- 167.235
+3 threads -- 166.29
+4 threads -- 176.65
+
+MPI
+1 thread -- 32.61
+2 threads -- 27.24
+3 threads -- 27.64
+4 threads -- 29.71
+8 threads -- 32.47
+12 threads -- 31.69
