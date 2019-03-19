@@ -4,8 +4,8 @@ Programa que busca y cuenta el número de apariciones de una palabra en un datas
 
 ## Theory behind code
 
-* [Openmp](https://github.com/mnl359/Text-analytics/blob/master/openmp.md)
-* [PCAM](https://github.com/mnl359/Text-analytics/blob/master/pcam.md)
+* [OpenMP](https://github.com/mnl359/Text-analytics/blob/master/docs/openmp.md)
+* [PCAM](https://github.com/mnl359/Text-analytics/blob/master/docs/pcam.md)
 
 ## Requirements
 
