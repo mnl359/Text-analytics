@@ -16,16 +16,16 @@ __Usage of OpenMP and MPI frameworks with C++__
   3. Clean files.
   4. Take each file and send it to next available node. 
   5. Each node has to:
-    1. Open file.
-    2. Define limiter to know what's a word, when there is a end of line and when there is end of the file.
-    3. Access to each new.
-    4. Read each column of the file.
-    5. Access to content column.
-    6. When found any word, save it on table and set its corresponding frequency.
+      1. Open file.
+      2. Define limiter to know what's a word, when there is a end of line and when there is end of the file.
+      3. Access to each new.
+      4. Read each column of the file.
+      5. Access to content column.
+      6. When found any word, save it on table and set its corresponding frequency.
   6. Ask for word is going to be searched.
   7. Send word to each node. 
-    1. Access to table.
-    2. Send top 10 of registers ordered by largest frequency of word in content. 
+      1. Access to table.
+      2. Send top 10 of registers ordered by largest frequency of word in content. 
   8. Receive and compile the work done by slaves in new table. 
   9. Organize new table descending by frequency.
   10. Show first 10 results with word, its frequency, id of the new it's on and title of that new.
