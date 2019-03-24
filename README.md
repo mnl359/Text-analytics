@@ -1,6 +1,6 @@
 # Text Analytics
 
-Programa que busca y cuenta el número de apariciones de una palabra en un dataset de noticias.
+This program is meant to search for a word in a news dataset.
 
 ## Theory behind code
 
@@ -69,7 +69,7 @@ To use this program, you have to follow the next steps:
 
     ```
     $ cd mpi
-    $ mpi++ mpi.cpp -o mpi -std=c++11 -fopenmp
+    $ mpic++ wordCounterMPI.cpp -o mpi -std=c++11 -fopenmp
     $ export OMP_NUM_THREADS=<nThreads>
     $ export OMP_DISPLAY_ENV='true'
     $ mpirun -f hosts_mpi -np 3 ./mpi
@@ -91,8 +91,9 @@ Implementing threads helped in execution. However, as explained in OpenMP design
 
 As shown in the following charts, we can conclude that using 3 threads is the most optimum. The more threads, the worst is going to become performance.
 
-![OpenMP](https://github.com/mnl359/Text-analytics/blob/master/images/OMPEfficiency.png)
-![OMPTable](https://github.com/mnl359/Text-analytics/blob/master/images/SpeedEfficiencyOMP.png)
+![SpeedUp](https://github.com/mnl359/Text-analytics/blob/master/images/SpeedUpOMP.png)
+![Efficiency](https://github.com/mnl359/Text-analytics/blob/master/images/EfficiencyOMP.png)
+![OMPTable](https://github.com/mnl359/Text-analytics/blob/master/images/OMPTable.png)
 
 __MPI with OpenMP__
 
