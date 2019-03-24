@@ -91,9 +91,9 @@ Implementing threads helped in execution. However, as explained in OpenMP design
 
 As shown in the following charts, we can conclude that using 3 threads is the most optimum. The more threads, the worst is going to become performance.
 
+![OMPTable](https://github.com/mnl359/Text-analytics/blob/master/images/OMPTable.png) 
 ![SpeedUp](https://github.com/mnl359/Text-analytics/blob/master/images/SpeedUpOMP.png)
 ![Efficiency](https://github.com/mnl359/Text-analytics/blob/master/images/EfficiencyOMP.png)
-![OMPTable](https://github.com/mnl359/Text-analytics/blob/master/images/OMPTable.png)
 
 __MPI with OpenMP__
 
@@ -106,5 +106,5 @@ The following table shows that, even though difference with 3 threas is really s
 
 ## Team members
 
-* Wendy María Arango Chavarría <warango4@eafit.edu.co>
+* Wendy María Arango Chavarría <warango4@eafit.edu.co> -- [Explanation](https://youtu.be/ra249CddYJw)
 * Manuela Carrasco Pinzón <mcarras1@eafit.edu.co>
