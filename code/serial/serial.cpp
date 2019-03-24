@@ -157,4 +157,5 @@ int main(int argc, char* argv[]) {
     double time = (double(time1 - time0)/CLOCKS_PER_SEC);
     cout << "Inverted index execution: " << time << endl;
     searchWord();
+    return 0;
 }
